@@ -8,6 +8,8 @@ var weatherTodayHumidityEl = document.querySelector("#weather-today-humidty");
 var weatherTodayUVEl = document.querySelector("#weather-today-uvindex");
 var cityInput = document.querySelector("#city-search")
 var forecastEL = document.querySelector("#forecast-container");
+var weatherTodayIcon = document.querySelector("weather-today-icon");
+var buttonBoxEl = document.querySelector("#button-box");
 
 var baseUrl ="https://api.openweathermap.org/";
 // var apiKey ="33ba12eb8456c85829294486c9bf64c1";
@@ -27,7 +29,7 @@ function populate5day(data) {
         div.classList = "card-weather text-light bg-dark col-md-2 p-3 me-2";
         div.innerHTML = `
         <h4>Date</h4>
-        <img src=https://openweathermap.org/img/wn/${icon}.png />
+        <img src="https://openweathermap.org/img/wn/${icon}.png" />
         <dl>
             <dt>Temp:</dt>
             <dd>${temp}</dd>
@@ -73,6 +75,7 @@ function getCityTodayWeather(city){
             weatherTodayWindEl.textContent = windSpeed;
             weatherTodayHumidityEl.textContent = humidity;
             weatherTodayUVEl.textContent = uviInd;
+            weatherTodayIcon.src= `https://openweathermap.org/img/wn/${icon}.png`;
 
             populate5day(data.daily);
 
@@ -80,12 +83,30 @@ function getCityTodayWeather(city){
     });
 }
 
+function populateButtons(city) {
+    forecastEL.innerHTML= "";
+    var button = document.createElement('button');
+    button.classList = "btn btn-secondary col-12";
+    button.textContent = city
+    button.setAttribute("data-city", city)
+    buttonBoxEl.appendChild(button);
+}
+
+function handleButtonClick(event){
+    var target = event.target;
+    var city = target.getAttribute("data-city");
+    getCityTodayWeather(city);
+}
+
 function addEventListeners(){
     searchFormEl.addEventListener("submit", function (event){
         event.preventDefault();
         var city = cityInput.value;
         getCityTodayWeather(city);
+        populateButtons(city);
     })
+
+    buttonBoxEl.addEventListener("click", handleButtonClick);
 }
 
 function init() {
