@@ -4,115 +4,124 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400,400i,700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css">
-    <link rel="stylesheet" href="./style.css" />
-    <title>Weather Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="./style.css">
+    <title>Document</title>
 </head>
-<body> 
+<body>
     <div class="container">
-        <div class="row">  
+        <div class="row">
             <div class="col-12">
-                <h1>Weather Dashboard</h1>
+                <header>
+                    <h1>Weather Dashjam</h1>
+                </header>
             </div>
         </div>
-        <div class="row">
-            <div class="col-3" id="search-side">
-                <div id="search-form-section">
-                    <h2>Search for a city:</h2>
-                    <form id="search-form">
-                        <input type="text" id="city-search" class="col-12" placeholder="San Diego"/>
-                        <button class="btn btn-primary col-12">Search</button>
-                    </form>
-                </div>
-                <div id="button-box">
-                    <!-- <button class="btn btn-secondary col-12">Placeholder</button> -->
-                </div>
-            </div>
-            <div class="col-9" id="main-section">
-                
 
+        <div class="row">
+            <div class="col-3">
+                <aside>
+                    <div id="search-container">
+                        <h2>Search for a City:</h2>
+                        <form id="search-form">
+                        <input id="search-city" type="text" class="col-12" placeholder="San Diego" />
+                        <button type="submit" class="btn btn-primary col-12">Search</button>
+                        </form>
+                    </div>
+
+                    <div>
+                        <button class="btn btn-secondary col-12">Austin</button>
+                    </div>
+                </aside>
+            </div>
+
+            <div class="col-9">
+                <main>
                     <div class="row">
-                        <div class="col-12" id="main-top">
-                            <h2 id="weather-today-city">Atlanta (date)</h2>
-                            <img id="weather-today-icon" src="">
+                        <div class="col-12">
+                            <h2 id="today-city">Atlanta (3/3/30/2021)</h2>
                             <dl>
-                                <dt>Temp:</dt>
-                                <dd id="weather-today-temp"></dd>
-                                <dt>Wind:</dt>
-                                <dd id="weather-today-wind"></dd>
-                                <dt>Humdity</dt>
-                                <dd id="weather-today-humidity"></dd>
-                                <dt>U/V Index:</dt>
-                                <dd id="weather-today-uvindex" class="rounded"></dd>
+                                <dt class="col">Temp: </dt>
+                                <dd id="today-temp" class="col">73.32</dd>
+                                <dt class="col">Wind: </dt>
+                                <dd id="today-wind" class="col">9,53 MPH</dd>
+                                <dt class="col">Humidity: </dt>
+                                <dd id="today-humidity" class="col">66%</dd>
+                                <dt class="col">UV Index: </dt>
+                                <dd id="today-uvIndex" class="col rounded">0.47</dd>
                             </dl>
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="col-12">
-                            <h3>5-Day Forecast:</h3>
+                            <h3>5-day Forecast:</h3>
                         </div>
+                        <div class="text-light bg-dark col me-2">
+                            <h4>3/30/2021</h4>
+                            <img src="https://via.placeholder.com/20" />
+                            <dl class="row">
+                                <dt class="col">Temp:</dt>
+                                <dd class="col">73.32</dd>
+                                <dt class="col">Wind:</dt>
+                                <dd class="col">9,53 MPH</dd>
+                                <dt class="col">Humidity:</dt>
+                                <dd class="col">66%</dd>
+                            </dl>
+                        </div>
+                        <div class="text-light bg-dark col me-2">
+                            <h4>3/30/2021</h4>
+                            <img src="https://via.placeholder.com/20" />
+                            <dl class="row">
+                                <dt class="col">Temp:</dt>
+                                <dd class="col">73.32</dd>
+                                <dt class="col">Wind:</dt>
+                                <dd class="col">9,53 MPH</dd>
+                                <dt class="col">Humidity:</dt>
+                                <dd class="col">66%</dd>
+                            </dl>
+                        </div>
+                        <div class="text-light bg-dark col me-2">
+                            <h4>3/30/2021</h4>
+                            <img src="https://via.placeholder.com/20" />
+                            <dl class="row">
+                                <dt class="col">Temp:</dt>
+                                <dd class="col">73.32</dd>
+                                <dt class="col">Wind:</dt>
+                                <dd class="col">9,53 MPH</dd>
+                                <dt class="col">Humidity:</dt>
+                                <dd class="col">66%</dd>
+                            </dl>
+                        </div>
+                        <div class="text-light bg-dark col me-2">
+                            <h4>3/30/2021</h4>
+                            <img src="https://via.placeholder.com/20" />
+                            <dl class="row">
+                                <dt class="col">Temp:</dt>
+                                <dd class="col">73.32</dd>
+                                <dt class="col">Wind:</dt>
+                                <dd class="col">9,53 MPH</dd>
+                                <dt class="col">Humidity:</dt>
+                                <dd class="col">66%</dd>
+                            </dl>
+                        </div>
+                        <div class="text-light bg-dark col me-2">
+                            <h4>3/30/2021</h4>
+                            <img src="https://via.placeholder.com/20" />
+                            <dl class="row">
+                                <dt class="col">Temp:</dt>
+                                <dd class="col">73.32</dd>
+                                <dt class="col">Wind:</dt>
+                                <dd class="col">9,53 MPH</dd>
+                                <dt class="col">Humidity:</dt>
+                                <dd class="col">66%</dd>
+                            </dl>
+                        </div>
+                        
                     </div>
-                    <div class="row col-12">
-                        <div id="forecast-container"></div>
-                        <!-- <div class="col-12" id="forecast-container"> -->
-                            <!-- <div class="card-weather text-light bg-dark col-md-2 p-3 me-2">
-                                <h4>Date</h4>
-                                <img src="https://via.palceholder.com/20" />
-                                <dl>
-                                    <dt>Temp:</dt>
-                                    <dd>73.32</dd>
-                                    <dt>Wind:</dt>
-                                    <dd>9.53mph</dd>
-                                    <dt>Humdity</dt>
-                                    <dd>66%</dd>
-                                </dl>
-                            </div>
-                            <div class="card-weather text-light bg-dark col-md-2 p-3 me-2">
-                                <h4>Date</h4>
-                                <img src="https://via.palceholder.com/20" />
-                                <dl>
-                                    <dt>Temp:</dt>
-                                    <dd>73.32</dd>
-                                    <dt>Wind:</dt>
-                                    <dd>9.53mph</dd>
-                                    <dt>Humdity</dt>
-                                    <dd>66%</dd>
-                                </dl>
-                            </div>
-                            <div class="card-weather text-light bg-dark col-md-2 p-3 me-2">
-                                <h4>Date</h4>
-                                <img src="https://via.palceholder.com/20" />
-                                <dl>
-                                    <dt>Temp:</dt>
-                                    <dd>73.32</dd>
-                                    <dt>Wind:</dt>
-                                    <dd>9.53mph</dd>
-                                    <dt>Humdity</dt>
-                                    <dd>66%</dd>
-                                </dl>
-                            </div>
-                            
-                            <div class="card-weather text-light bg-dark col-md-2 p-3 me-2">
-                                <h4>Date</h4>
-                                <img src="https://via.palceholder.com/20" />
-                                <dl>
-                                    <dt>Temp:</dt>
-                                    <dd>73.32</dd>
-                                    <dt>Wind:</dt>
-                                    <dd>9.53mph</dd>
-                                    <dt>Humdity</dt>
-                                    <dd>66%</dd>
-                                </dl>
-                            </div>
-                            
-                        </div> -->
-                    </div>
-                    </div>
-                
+                </main>
             </div>
+
         </div>
     </div>
     <script src="./script.js"></script>
