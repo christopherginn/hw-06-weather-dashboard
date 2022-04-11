@@ -32,13 +32,14 @@ function fetchCityWeather(city) {
         var lat = data[0].lat;
         var lon = data[0].lon;
 
-        var todayWeathUrl = `${startUrl}data/2.5/onecall?lat=${lat}&lon=${lon}&&appid=${apiKey}`;
+        var todayWeathUrl = `${startUrl}data/2.5/onecall?lat=${lat}&lon=${lon}&units=imperial&appid=${apiKey}`;
 
         fetch(todayWeathUrl).then(function(response){
             return response.json();
         })
         .then(function(data){
             console.log(data);
+
         });
     });
 };
