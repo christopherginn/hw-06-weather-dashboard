@@ -28,7 +28,18 @@ function fetchCityWeather(city) {
         return response.json();
     })
     .then(function(data){
-        console.log(data)
+        // console.log(data)
+        var lat = data[0].lat;
+        var lon = data[0].lon;
+
+        var todayWeathUrl = `${startUrl}data/2.5/onecall?lat=${lat}&lon=${lon}&&appid=${apiKey}`;
+
+        fetch(todayWeathUrl).then(function(response){
+            return response.json();
+        })
+        .then(function(data){
+            console.log(data);
+        });
     });
 };
 run();
