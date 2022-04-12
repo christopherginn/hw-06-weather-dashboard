@@ -56,6 +56,28 @@ function fetchCityWeather(city) {
             todayHumidity.textContent = humid + "%";
             todayUvind.textContent = uv;
 
+            for (let i = 1; i < 6; i++) {
+                var tempDaily = data.daily[i].temp.day;
+                var windDaily = data.daily[i].wind_speed;
+                var humidDaily = data.daily[i].humidity;
+                var icon = data.daily[i].weather[0].icon;
+
+                var div = document.createElement('div');
+                div.classList = "text-light bg-dark col me-2";
+                div.innerHTML = `
+                    <h4>3/30/2021</h4>
+                    <img src="https://via.placeholder.com/20" />
+                     <dl>
+                        <dt class="col">Temp:</dt>
+                        <dd class="col">${tempDaily}&#176;</dd>
+                        <dt class="col">Wind:</dt>
+                        <dd class="col">${windDaily} MPH</dd>
+                        <dt class="col">Humidity:</dt>
+                        <dd class="col">${humidDaily}%</dd>
+                     </dl>
+                    `
+                document.getElementById("forecast-display").appendChild(div);
+              }
         });
     });
 };
