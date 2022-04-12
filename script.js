@@ -6,6 +6,7 @@ var todayWind = document.getElementById("today-wind");
 var todayHumidity = document.getElementById("today-humidity");
 var todayUvind = document.getElementById("today-uvIndex");
 var searchCityInput = document.getElementById("search-city");
+var buttonContain = document.getElementById("button-box");
 
 var startUrl = "http://api.openweathermap.org/";
 var apiKey = "33ba12eb8456c85829294486c9bf64c1";
@@ -13,11 +14,12 @@ var apiKey = "33ba12eb8456c85829294486c9bf64c1";
 function run() {
     searchForm.addEventListener("submit", function(event) {
         event.preventDefault();
-        
+        document.getElementById("forecast-display").innerHTML= "";
         var city = searchCityInput.value;
 
 
         fetchCityWeather(city);
+        cityButtons(city);
     });
 }
 
@@ -43,6 +45,7 @@ function fetchCityWeather(city) {
             var wind = data.current.wind_speed;
             var humid = data.current.humidity;
             var uv = data.current.uvi;
+            var icon = data.current.weather[0].icon
 
             var cityArray = city.split(" ");
             for (var i = 0; i < cityArray.length; i++) {
@@ -50,7 +53,7 @@ function fetchCityWeather(city) {
             }
             var cityFormatted = cityArray.join(" ");
 
-            todayWeatherCityDate.textContent = cityFormatted;
+            todayWeatherCityDate.innerHTML = `${cityFormatted} 3/3/3 <img src="http://openweathermap.org/img/wn/${icon}.png" />`;
             todayTemp.textContent = temp +"\u00B0";
             todayWind.textContent = wind + " MPH";
             todayHumidity.textContent = humid + "%";
@@ -60,13 +63,13 @@ function fetchCityWeather(city) {
                 var tempDaily = data.daily[i].temp.day;
                 var windDaily = data.daily[i].wind_speed;
                 var humidDaily = data.daily[i].humidity;
-                var icon = data.daily[i].weather[0].icon;
+                var iconDaily = data.daily[i].weather[0].icon;
 
                 var div = document.createElement('div');
                 div.classList = "text-light bg-dark col me-2";
                 div.innerHTML = `
                     <h4>3/30/2021</h4>
-                    <img src="http://openweathermap.org/img/wn/${icon}.png" />
+                    <img src="http://openweathermap.org/img/wn/${iconDaily}.png" />
                      <dl>
                         <dt class="col">Temp:</dt>
                         <dd class="col">${tempDaily}&#176;</dd>
@@ -82,4 +85,19 @@ function fetchCityWeather(city) {
         });
     });
 };
+
+function cityButtons(city) {
+    var cityButton = document.createElement('button');
+    cityButton.classList = "btn btn-secondary col-12";
+
+    var cityArray = city.split(" ");
+    for (var i = 0; i < cityArray.length; i++) {
+        cityArray[i] = cityArray[i].charAt(0).toUpperCase() + cityArray[i].slice(1);
+    }
+    var cityFormatted = cityArray.join(" ");
+    cityButton.textContent = cityFormatted;
+    cityButton.setAttribute("data-city", city);
+    buttonContain.appendChild(cityButton);
+}
+
 run();
