@@ -20,10 +20,26 @@ function run() {
 
         fetchCityWeather(city);
         cityButtons(city);
+        
+        var cities = localStorage.getItem('cities')
+        if (cities) {
+            cities = JSON.parse(cities)
+        } else {
+            cities = []
+        }
+
+        if (cities.includes(city)) {
+            return;
+        } else {
+            cities.push(city)
+        };
+
+        localStorage.setItem("cities", JSON.stringify(city));
     });
 }
 
 function fetchCityWeather(city) {
+    document.getElementById("forecast-display").innerHTML= "";
     var url = `${startUrl}geo/1.0/direct?q=${city}&limit=1&appid=${apiKey}`;
 
     fetch(url).then(function(response){
@@ -88,7 +104,7 @@ function fetchCityWeather(city) {
 
 function cityButtons(city) {
     var cityButton = document.createElement('button');
-    cityButton.classList = "btn btn-secondary col-12";
+    cityButton.classList = "btn btn-secondary col-12 mt-2";
 
     var cityArray = city.split(" ");
     for (var i = 0; i < cityArray.length; i++) {
@@ -96,8 +112,32 @@ function cityButtons(city) {
     }
     var cityFormatted = cityArray.join(" ");
     cityButton.textContent = cityFormatted;
+
     cityButton.setAttribute("data-city", city);
     buttonContain.appendChild(cityButton);
+
+    cityButton.addEventListener("click", function(event){
+        var target = event.target;
+        var city = target.getAttribute("data-city");
+        fetchCityWeather(city);
+
+        // var cities = localStorage.getItem('cities')
+        // if (cities) {
+        //     cities = JSON.parse(cities)
+        // } else {
+        //     cities = []
+        // }
+
+        // if (cities.includes(city)) {
+        //     return;
+        // } else {
+        // cities.push(city)
+        // };
+
+        // localStorage.setItem("cities", JSON.stringify(city));
+    });
+
+
 }
 
 run();
