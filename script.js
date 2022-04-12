@@ -66,7 +66,7 @@ function fetchCityWeather(city) {
                 div.classList = "text-light bg-dark col me-2";
                 div.innerHTML = `
                     <h4>3/30/2021</h4>
-                    <img src="https://via.placeholder.com/20" />
+                    <img src="http://openweathermap.org/img/wn/${icon}.png" />
                      <dl>
                         <dt class="col">Temp:</dt>
                         <dd class="col">${tempDaily}&#176;</dd>
@@ -77,7 +77,8 @@ function fetchCityWeather(city) {
                      </dl>
                     `
                 document.getElementById("forecast-display").appendChild(div);
-              }
+            };
+
         });
     });
 };
