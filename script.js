@@ -39,6 +39,22 @@ function fetchCityWeather(city) {
         })
         .then(function(data){
             console.log(data);
+            var temp = data.current.temp
+            var wind = data.current.wind_speed;
+            var humid = data.current.humidity;
+            var uv = data.current.uvi;
+
+            var cityArray = city.split(" ");
+            for (var i = 0; i < cityArray.length; i++) {
+                cityArray[i] = cityArray[i].charAt(0).toUpperCase() + cityArray[i].slice(1);
+            }
+            var cityFormatted = cityArray.join(" ");
+
+            todayWeatherCityDate.textContent = cityFormatted;
+            todayTemp.textContent = temp +"\u00B0";
+            todayWind.textContent = wind + " MPH";
+            todayHumidity.textContent = humid + "%";
+            todayUvind.textContent = uv;
 
         });
     });
