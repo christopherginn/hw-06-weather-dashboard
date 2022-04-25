@@ -21,20 +21,6 @@ function run() {
         // cityButtons(city);
         save(city);
         
-        // var cities = localStorage.getItem('cities')
-        // if (cities) {
-        //     cities = JSON.parse(cities)
-        // } else {
-        //     cities = []
-        // }
-
-        // if (cities.includes(city)) {
-        //     return;
-        // } else {
-        //     cities.push(city)
-        // };
-
-        // localStorage.setItem("cities", JSON.stringify(city));
     });
 }
 
@@ -70,11 +56,23 @@ function fetchCityWeather(city) {
             }
             var cityFormatted = cityArray.join(" ");
 
-            todayWeatherCityDate.innerHTML = `${cityFormatted} ${currentDate} <img src="http://openweathermap.org/img/wn/${icon}.png" />`;
-            todayTemp.textContent = temp +"\u00B0";
+            todayWeatherCityDate.innerHTML = `${cityFormatted} (${currentDate}) <img src="http://openweathermap.org/img/wn/${icon}.png" />`;
+            todayTemp.textContent = temp +"\u00B0F";
             todayWind.textContent = wind + " MPH";
             todayHumidity.textContent = humid + "%";
             todayUvind.textContent = uv;
+            todayUvind.removeAttribute("class");
+            
+            if (uv <= 2 && uv > 0){
+                todayUvind.classList.add("favorable");
+            } else if (uv > 2 && uv <=7 ){
+                todayUvind.classList.add("moderate");
+            } else if (uv > 7) {
+                todayUvind.classList.add("severe");
+            } else {
+                todayUvind.classList.add("error");
+                todayUvind.textContent = uv + " (The UV index may not have loaded correctly. Please try again later.)"
+            }
 
             for (let i = 1; i < 6; i++) {
                 var tempDaily = data.daily[i].temp.day;
@@ -90,7 +88,7 @@ function fetchCityWeather(city) {
                     <img src="http://openweathermap.org/img/wn/${iconDaily}.png" />
                      <dl>
                         <dt class="col">Temp:</dt>
-                        <dd class="col">${tempDaily}&#176;</dd>
+                        <dd class="col">${tempDaily}&#176;F</dd>
                         <dt class="col">Wind:</dt>
                         <dd class="col">${windDaily} MPH</dd>
                         <dt class="col">Humidity:</dt>
@@ -106,10 +104,6 @@ function fetchCityWeather(city) {
 };
 
 function cityButtons(city) {
-    // var cities = JSON.parse(localStorage.getItem('cities'));
-    // if (cities.includes(city)){
-    //     return;
-    // } else {
 
     var cityButton = document.createElement('button');
     cityButton.classList = "btn btn-secondary col-12 mt-2";
@@ -129,25 +123,6 @@ function cityButtons(city) {
         var city = target.getAttribute("data-city");
         fetchCityWeather(city);
     });
-
-    //     var cities = localStorage.getItem('cities')
-    //     if (cities) {
-    //         cities = JSON.parse(cities)
-    //     } else {
-    //         cities = []
-    //     }
-
-    //     if (cities.includes(city)) {
-    //         return;
-    //     } else {
-    //     cities.push(city)
-    //     };
-
-    //     localStorage.setItem("cities", JSON.stringify(city));
-    // });
-    
-
-
 };
 
 function save(city) {
