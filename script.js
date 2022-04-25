@@ -15,26 +15,26 @@ function run() {
     searchForm.addEventListener("submit", function(event) {
         event.preventDefault();
         document.getElementById("forecast-display").innerHTML= "";
-        var city = searchCityInput.value;
-
+        var city = searchCityInput.value.toLowerCase();
 
         fetchCityWeather(city);
-        cityButtons(city);
+        // cityButtons(city);
+        save(city);
         
-        var cities = localStorage.getItem('cities')
-        if (cities) {
-            cities = JSON.parse(cities)
-        } else {
-            cities = []
-        }
+        // var cities = localStorage.getItem('cities')
+        // if (cities) {
+        //     cities = JSON.parse(cities)
+        // } else {
+        //     cities = []
+        // }
 
-        if (cities.includes(city)) {
-            return;
-        } else {
-            cities.push(city)
-        };
+        // if (cities.includes(city)) {
+        //     return;
+        // } else {
+        //     cities.push(city)
+        // };
 
-        localStorage.setItem("cities", JSON.stringify(city));
+        // localStorage.setItem("cities", JSON.stringify(city));
     });
 }
 
@@ -62,6 +62,7 @@ function fetchCityWeather(city) {
             var humid = data.current.humidity;
             var uv = data.current.uvi;
             var icon = data.current.weather[0].icon
+            var currentDate = new Date(data.current.dt * 1000).toLocaleDateString('en-us');
 
             var cityArray = city.split(" ");
             for (var i = 0; i < cityArray.length; i++) {
@@ -69,7 +70,7 @@ function fetchCityWeather(city) {
             }
             var cityFormatted = cityArray.join(" ");
 
-            todayWeatherCityDate.innerHTML = `${cityFormatted} 3/3/3 <img src="http://openweathermap.org/img/wn/${icon}.png" />`;
+            todayWeatherCityDate.innerHTML = `${cityFormatted} ${currentDate} <img src="http://openweathermap.org/img/wn/${icon}.png" />`;
             todayTemp.textContent = temp +"\u00B0";
             todayWind.textContent = wind + " MPH";
             todayHumidity.textContent = humid + "%";
@@ -80,11 +81,12 @@ function fetchCityWeather(city) {
                 var windDaily = data.daily[i].wind_speed;
                 var humidDaily = data.daily[i].humidity;
                 var iconDaily = data.daily[i].weather[0].icon;
+                var forecastDate = new Date(data.daily[i].dt * 1000).toLocaleDateString('en-us');
 
                 var div = document.createElement('div');
                 div.classList = "text-light bg-dark col me-2";
                 div.innerHTML = `
-                    <h4>3/30/2021</h4>
+                    <h4>${forecastDate}</h4>
                     <img src="http://openweathermap.org/img/wn/${iconDaily}.png" />
                      <dl>
                         <dt class="col">Temp:</dt>
@@ -100,9 +102,15 @@ function fetchCityWeather(city) {
 
         });
     });
+    
 };
 
 function cityButtons(city) {
+    // var cities = JSON.parse(localStorage.getItem('cities'));
+    // if (cities.includes(city)){
+    //     return;
+    // } else {
+
     var cityButton = document.createElement('button');
     cityButton.classList = "btn btn-secondary col-12 mt-2";
 
@@ -120,24 +128,54 @@ function cityButtons(city) {
         var target = event.target;
         var city = target.getAttribute("data-city");
         fetchCityWeather(city);
-
-        // var cities = localStorage.getItem('cities')
-        // if (cities) {
-        //     cities = JSON.parse(cities)
-        // } else {
-        //     cities = []
-        // }
-
-        // if (cities.includes(city)) {
-        //     return;
-        // } else {
-        // cities.push(city)
-        // };
-
-        // localStorage.setItem("cities", JSON.stringify(city));
     });
 
+    //     var cities = localStorage.getItem('cities')
+    //     if (cities) {
+    //         cities = JSON.parse(cities)
+    //     } else {
+    //         cities = []
+    //     }
 
+    //     if (cities.includes(city)) {
+    //         return;
+    //     } else {
+    //     cities.push(city)
+    //     };
+
+    //     localStorage.setItem("cities", JSON.stringify(city));
+    // });
+    
+
+
+};
+
+function save(city) {
+    var new_city = city
+    if (localStorage.getItem('cities') == null){
+        localStorage.setItem('cities', '[]');
+    }
+    var cities = JSON.parse(localStorage.getItem('cities'));
+    if (cities.includes(new_city)){
+        return;
+    } else {
+        cities.push(new_city);
+    };
+    
+
+    localStorage.setItem('cities', JSON.stringify(cities));
+
+    view();
 }
 
+function view(){
+    buttonContain.innerHTML = ``;
+    if (localStorage.getItem('cities') != null){
+        var cities = JSON.parse(localStorage.getItem('cities'));
+        for (i=0; i < cities.length; i++) {
+            cityButtons(cities[i]);
+        }
+    }
+}
+view();
 run();
