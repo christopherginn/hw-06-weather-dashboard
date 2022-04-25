@@ -8,7 +8,7 @@ var todayUvind = document.getElementById("today-uvIndex");
 var searchCityInput = document.getElementById("search-city");
 var buttonContain = document.getElementById("button-box");
 
-var startUrl = "http://api.openweathermap.org/";
+var startUrl = "https://api.openweathermap.org/";
 var apiKey = "33ba12eb8456c85829294486c9bf64c1";
 
 function run() {
